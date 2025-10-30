@@ -821,6 +821,14 @@ ssl.add_argument(
     """,
 )
 ssl.add_argument(
+    '-k',
+    action='store_const',
+    const='no',
+    dest='verify',
+    short_help='Shortcut for --verify=no (skip SSL verification).',
+    help=Qualifiers.SUPPRESS,
+)
+ssl.add_argument(
     '--ssl',
     dest='ssl_version',
     choices=sorted(AVAILABLE_SSL_VERSION_ARG_MAPPING.keys()),

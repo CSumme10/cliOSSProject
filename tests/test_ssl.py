@@ -113,6 +113,12 @@ class TestServerCert:
         r = http(httpbin_secure.url + '/get', '--verify=no')
         assert HTTP_OK in r
 
+    def test_verify_short_flag_k_OK(self, httpbin_secure):
+        # short alias -k should behave like --verify=no
+        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+        r = http(httpbin_secure.url + '/get', '-k')
+        assert HTTP_OK in r
+
     @pytest.mark.parametrize('verify_value', ['false', 'fALse'])
     def test_verify_false_OK(self, httpbin_secure, verify_value):
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
